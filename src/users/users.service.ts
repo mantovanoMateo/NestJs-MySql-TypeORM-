@@ -25,8 +25,8 @@ export class UsersService {
         this.s3 = new S3({
             region: 'sa-east-1',
             credentials: {
-                accessKeyId: 'AKIA6GBMHJSJWC2YTTYO',
-                secretAccessKey: '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',
+                accessKeyId: '',
+                secretAccessKey: '',
             }
         });
     }
