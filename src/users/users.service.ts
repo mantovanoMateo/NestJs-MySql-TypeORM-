@@ -35,7 +35,7 @@ export class UsersService {
         const key = uuidv4();
 
         const uploadParams = {
-            Bucket: 'nest-js-s3-bucket',
+            Bucket: '',
             Key: key,
             Body: file.buffer,
             ContentType: file.mimetype,
