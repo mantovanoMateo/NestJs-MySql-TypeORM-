@@ -22,33 +22,34 @@ export class UsersService {
     constructor(@InjectRepository(User) private userRepository: Repository<User>,
         @InjectRepository(Profile) private profileRepository: Repository<Profile>,
         private readonly mailService: MailerService) {
-        this.s3 = new S3({
-            region: 'sa-east-1',
-            credentials: {
-                accessKeyId: '',
-                secretAccessKey: '',
-            }
-        });
+        // this.s3 = new S3({
+        //     region: 'sa-east-1',
+        //     credentials: {
+        //         accessKeyId: '',
+        //         secretAccessKey: '',
+        //     }
+        // });
     }
 
     async uploadFile(file: Express.Multer.File): Promise<string> {
-        const key = uuidv4();
+        // const key = uuidv4();
 
-        const uploadParams = {
-            Bucket: '',
-            Key: key,
-            Body: file.buffer,
-            ContentType: file.mimetype,
-            ACL: ObjectCannedACL.public_read,
-        };
+        // const uploadParams = {
+        //     Bucket: '',
+        //     Key: key,
+        //     Body: file.buffer,
+        //     ContentType: file.mimetype,
+        //     ACL: ObjectCannedACL.public_read,
+        // };
 
-        const command = new PutObjectCommand(uploadParams);
-        await this.s3.send(command);
+        // const command = new PutObjectCommand(uploadParams);
+        // await this.s3.send(command);
 
         // 22d19481-b512-4187-8dd5-a4bb6ecc2dae Key de un objeto ya subido
 
         // Retorna la URL pública del archivo
-        return `https://${uploadParams.Bucket}.s3.sa-east-1.amazonaws.com/${uploadParams.Key}`;
+        // return `https://${uploadParams.Bucket}.s3.sa-east-1.amazonaws.com/${uploadParams.Key}`;
+        return `none`;
     }
 
     async deleteFile(fileKey: string) {
