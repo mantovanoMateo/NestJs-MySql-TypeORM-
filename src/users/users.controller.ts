@@ -1,9 +1,11 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, FileTypeValidator, Get, MaxFileSizeValidator, Param, ParseFilePipe, ParseIntPipe, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { CreateProfileDto } from './dto/create-profile.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import * as AWS from 'aws-sdk';
 
 @Controller('users')
 export class UsersController {
@@ -39,5 +41,23 @@ export class UsersController {
     @Post(':id/profile')
     createProfile(@Param('id', ParseIntPipe) id: number, @Body() profile: CreateProfileDto) {
         return this.usersService.createProfile(id, profile);
+    }
+
+    @Post('sendMail')
+    sendMail() {
+        return this.usersService.sendMail();
+    }
+
+    @Post('upload')
+    @UseInterceptors(FileInterceptor('file'))
+    uploadFile(@UploadedFile() file: Express.Multer.File) {
+        return this.usersService.uploadFile(file);
+        //console.log(file);
+        //return this.usersService.uploadFile(file);
+    }
+
+    @Delete('deleteFile/:key')
+    deleteFile(@Param('key') key: string) {
+        return this.usersService.deleteFile(key);
     }
 }
