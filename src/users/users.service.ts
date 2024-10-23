@@ -19,12 +19,6 @@ export class UsersService {
 
     private s3: S3;
 
-    //AWS_S3_BUCKET = 'nest-js-s3-bucket';
-    // s3 = new AWS.S3({
-    //     accessKeyId: 'AKIA6GBMHJSJWC2YTTYO',
-    //     secretAccessKey: '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',
-    // });
-
     constructor(@InjectRepository(User) private userRepository: Repository<User>,
         @InjectRepository(Profile) private profileRepository: Repository<Profile>,
         private readonly mailService: MailerService) {
